@@ -9,6 +9,9 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 DATA_FILE = 'mood_data.csv'
+# If running on Vercel, use the writable ephemeral storage at /tmp
+if os.environ.get('VERCEL'):
+    DATA_FILE = os.path.join('/tmp', 'mood_data.csv')
 
 class MoodTracker:
     def __init__(self):
